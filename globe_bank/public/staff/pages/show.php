@@ -11,7 +11,7 @@
 <?php require(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">
-  <div class="subjects listing">
+  <div class="page listing">
 
 	<a class="back-link" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
 

@@ -1,0 +1,14 @@
+pages
+id: primary key
+subject_id: integer (foreign key)
+menu_name: string
+position: integer
+visible: boolean (tiny int, 1 or 0)
+content: text
+
+add indexes on all foreign keys
+add data for pages ((see video for this!!))
+
+try CRUD SQL commands
+find subjects by primary key
+find pages by primary and foreign keys
