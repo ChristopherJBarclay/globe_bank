@@ -1,26 +1,11 @@
 <?php // cannot have ANY whitespace or returns ... they count as HTML characters which should not come before the HTML header
 require_once('../../../private/initialize.php');
 
-// I revised this page to NOT use create.php, and be single-page form submission
+// This page is not single-page form submission any longer, it uses create.php
 
 $menu_name = '';
 $position = '';
 $visible = '';
-
-// Handle form values sent by new.php
-
-if(is_post_request()) {
-  //php-v5: $test = isset($_GET['test']) ? $_GET['test'] : '';
-  //php-v7: $test = $_GET['test']) ?? ]];
-  $menu_name = isset($_POST['menu_name']) ? $_POST['menu_name'] : '';
-  $position = isset($_POST['position']) ? $_POST['position'] : '';
-  $visible = isset($_POST['visible']) ? $_POST['visible'] : '';
-
-  echo "Form parameters<br />";
-  echo "Menu name: " . $menu_name . "<br />";
-  echo "Position: " . $position . "<br />";
-  echo "Visible: " . $visible . "<br />";
-} 
 
 ?>
 
@@ -34,7 +19,7 @@ if(is_post_request()) {
   <div class="subject new">
       <h1>Create Subject</h1>
 
-      <form action="<?php echo url_for('/staff/subjects/new.php'); ?>" method="post">
+      <form action="<?php echo url_for('/staff/subjects/create.php'); ?>" method="post">
           <dl>
             <dt>Menu Name</dt>
             <dd><input type="text" name="menu_name" value="<?php echo $menu_name; ?>" /></dd>
