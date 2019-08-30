@@ -10,6 +10,8 @@ $id = $_GET['id'];
 if(is_post_request()) {
   //php-v5: $test = isset($_GET['test']) ? $_GET['test'] : '';
   //php-v7: $test = $_GET['test']) ?? ]];
+
+  // Handle form values sent by new.php
   $subject = [];
   $subject['id'] = $id;
   $subject['menu_name'] = isset($_POST['menu_name']) ? $_POST['menu_name'] : '';
@@ -17,16 +19,21 @@ if(is_post_request()) {
   $subject['visible'] = isset($_POST['visible']) ? $_POST['visible'] : '';
 
   $result = update_subject($subject);
-  redirect_to(url_for('/staff/subjects/show.php?id=' . $id));
+  if($result === true) {
+    $_SESSION['message'] = 'The subject was edited successfully.';
+    redirect_to(url_for('/staff/subjects/show.php?id=' . $id));
+  } else {
+    $errors = $result;
+    // var_dump($errors);
+  }
 
 } else {
   $subject = find_subject_by_id($id);
-
-  $subject_set = find_all_subjects();
-  $subject_count = mysqli_num_rows($subject_set);
-  mysqli_free_result($subject_set);
 }
 
+$subject_set = find_all_subjects();
+$subject_count = mysqli_num_rows($subject_set);
+mysqli_free_result($subject_set);
 
 ?>
 
@@ -38,6 +45,8 @@ if(is_post_request()) {
 
   <div class="subject edit">
       <h1>Edit Subject</h1>
+
+      <?php echo display_errors($errors); ?>
 
       <form action="<?php echo url_for('/staff/subjects/edit.php?id=' . h(u($id))); ?>" method="post">
           <dl>
