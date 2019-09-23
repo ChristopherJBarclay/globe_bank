@@ -1,6 +1,8 @@
 <?php // cannot have ANY whitespace or returns ... they count as HTML characters which should not come before the HTML header
 require_once('../../../private/initialize.php');
 
+require_login();
+
 if(is_post_request()) {
   //php-v5: $test = isset($_GET['test']) ? $_GET['test'] : '';
   //php-v7: $test = $_GET['test']) ?? ]];
