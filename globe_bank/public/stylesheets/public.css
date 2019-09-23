@@ -139,7 +139,7 @@ nav li {
 
 @media screen and (min-width: 1370px) {
   #page {
-    padding-right: 247px;
+    margin-right: 247px;
   }
 }
 
