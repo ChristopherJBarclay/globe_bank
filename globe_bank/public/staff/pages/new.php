@@ -1,6 +1,8 @@
 <?php // cannot have ANY whitespace or returns ... they count as HTML characters which should not come before the HTML header
   require_once('../../../private/initialize.php');
 
+  require_login();
+
   if (is_post_request()) {
     //php-v5: $test = isset($_GET['test']) ? $_GET['test'] : '';
     //php-v7: $test = $_GET['test']) ?? ]];
@@ -25,17 +27,15 @@
   } else {
 
     $page = [];
-    $page['subject_id'] = '';
+    $page['subject_id'] = isset($_GET['subject_id']) ? $_GET['subject_id'] : '1';
     $page['menu_name'] = '';
     $page['position'] = '';
     $page['visible'] = '';
     $page['content'] = '';
 
   }
-  
-  $page_set = find_all_pages();
-  $page_count = mysqli_num_rows($page_set) + 1;
-  mysqli_free_result($page_set);
+
+  $page_count = count_pages_by_subject_id($page['subject_id']) + 1;
 
 ?>
 
@@ -44,7 +44,7 @@
 
 <div id="content">
 
-  <a class="back-link" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
+  <a class="back-link" href="<?php echo url_for('/staff/subjects/show.php?id=' . h(u($page['subject_id']))); ?>">&laquo; Back to Subject Page</a>
 
   <div class="page new">
     <h1>Create Page</h1>
